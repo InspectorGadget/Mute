@@ -8,6 +8,10 @@ commands:
     permission: mute.command
     usage: "/mute {player}"
     description: "Mutes a player!"
+  unmute:
+    permission: mute.command
+    usage: "/unmute {player}"
+    description: "Unmutes a Player"
 permissions:
   mute.command:
     default: op

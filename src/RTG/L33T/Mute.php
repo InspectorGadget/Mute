@@ -42,29 +42,61 @@ class Mute extends PluginBase implements Listener {
 						
 						$p = $param[0];
 						
-							if($this->getServer()->getPlayer($p) !== null) {
+							if($this->getServer()->getPlayer($p) === null) {
+								$sender->sendMessage("$p is not a Valid Player!");
+							}
+							else {
 								
 								$pl = $this->getServer()->getPlayer($p);
 								
-								if(isset($this->enabled[strtolower($p)])) {
-									unset($this->enabled[strtolower($p)]);
-									$sender->sendMessage("$p has been unMuted!");
-									$pl->sendMessage(TF::RED . "You have been muted!");
+								if(!(isset($this->enabled[strtolower($p)]))) {
+									$this->enabled[strtolower($p)] = strtolower($p);
+									$sender->sendMessage("You have Muted $p");
+									$pl->sendMessage(TF::GREEN . "You have been Muted!");
 								}
 								else {
-									$this->enabled[strtolower($p)] = strtolower($p);
-									$sender->sendMessage("You have muted $p");
-									$pl->sendMessage(TF::GREEN . "You have been unMuted!");
+									$sender->sendMessage("$p isnt Muted!");
 								}
 									
-							}
-							else {
-								$sender->sendMessage("$p is not a Valid Player!");
 							}
 								
 					}
 					else {
 						$sender->sendMessage("Usage: /mute {player}");
+					}
+						
+				}
+				else {
+					$sender->sendMessage(TF::RED . "You have no permission to use this command!");
+				}
+				return true;
+			break;
+			
+			case "unmute":
+				if($sender->isOp() or $sender->hasPermission("mute.command")) {
+					
+					if(isset($param[0])) {
+						
+						$p = $param[0];
+							
+							if($this->getServer()->getPlayer($p) === null) {
+								$sender->sendMessage("$p is not a Valid Player!");
+							}
+							else {
+								
+								$pl = $this->getServer()->getPlayer($p);
+								
+								if(isset($this->enabled[strtolower($p)])) {
+									unset($this->enabled[strtolower($p)]);
+									$sender->sendMessage("You have Unmuted $p");
+									$pl->sendMessage(TF::GREEN . "You have been Unmuted!");
+								}
+								
+							}
+					
+					}
+					else {
+						$sender->sendMessage("Usage: /unmute {player}");
 					}
 						
 				}
