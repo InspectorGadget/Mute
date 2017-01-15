@@ -1,0 +1,13 @@
+name: Mute
+version: 1.0.0
+main: RTG\L33T\Mute
+api: 2.1.0
+author: IG
+commands:
+  mute:
+    permission: mute.command
+    usage: "/mute {player}"
+    description: "Mutes a player!"
+permissions:
+  mute.command:
+    default: op
